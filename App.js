@@ -1,13 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { NativeBaseProvider } from "native-base";
-
 import { Provider } from "react-redux";
+import { NavigationContainer } from "@react-navigation/native";
 
 // Components
-import Home from "./components/Home";
-import ShopList from "./components/ShopList";
-
+import StackNavigator from "./components/Navigation/StackNavigator";
 // Store
 import store from "./store";
 
@@ -15,8 +13,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <NativeBaseProvider>
-        {/* <Home /> */}
-        <ShopList />
+        <NavigationContainer>
+          <StackNavigator />
+        </NavigationContainer>
       </NativeBaseProvider>
     </Provider>
   );

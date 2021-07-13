@@ -1,12 +1,12 @@
 import instance from "./instance";
 import * as actionTypes from "./types";
 
-export const fetchShops = () => {
+export const fetchProducts = () => {
   return async (dispatch) => {
     try {
-      const res = await instance.get("/libraries");
+      const res = await instance.get("/books");
       dispatch({
-        type: actionTypes.FETCH_SHOPS,
+        type: actionTypes.FETCH_PRODUCTS,
         payload: res.data,
       });
     } catch (error) {

@@ -1,22 +1,22 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-// Styling
-import { StyleSheet, Text, View } from "react-native";
-import { Center, Spinner, List, Box } from "native-base";
+// Components
 import ShopItem from "./ShopItem";
+import Loading from "../Loading";
 
-const ShopList = () => {
+// Styling
+import { Text } from "react-native";
+import { Center, List, Box } from "native-base";
+
+const ShopList = ({ navigation }) => {
   const shops = useSelector((state) => state.shopReducer.shops);
   const loading = useSelector((state) => state.shopReducer.loading);
-  if (loading)
-    return (
-      <Center flex={1}>
-        <Spinner color="blue" />
-      </Center>
-    );
+  if (loading) return <Loading />;
 
-  const shopList = shops.map((shop) => <ShopItem key={shop.id} shop={shop} />);
+  const shopList = shops.map((shop) => (
+    <ShopItem key={shop.id} navigation={navigation} shop={shop} />
+  ));
 
   return (
     <Center flex={1}>
@@ -31,5 +31,3 @@ const ShopList = () => {
 };
 
 export default ShopList;
-
-const styles = StyleSheet.create({});

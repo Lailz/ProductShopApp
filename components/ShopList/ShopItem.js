@@ -1,11 +1,19 @@
-import { List } from "native-base";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 
-const ShopItem = ({ shop }) => {
-  return <List.Item>{shop.name}</List.Item>;
+// Stylings
+import styles from "../../styles";
+import { List } from "native-base";
+import { SHOP_DETAIL } from "../Navigation/types";
+
+const ShopItem = ({ navigation, shop }) => {
+  return (
+    <List.Item
+      onPress={() => navigation.navigate(SHOP_DETAIL, { shop })}
+      style={styles.item}
+    >
+      {shop.name}
+    </List.Item>
+  );
 };
 
 export default ShopItem;
-
-const styles = StyleSheet.create({});
