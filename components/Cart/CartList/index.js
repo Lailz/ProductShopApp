@@ -1,12 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Alert, StyleSheet } from "react-native";
 import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
-import { Center, List, Box } from "native-base";
+import { Center, List, Box, Button, Text } from "native-base";
+import { useDispatch } from "react-redux";
+import { checkout } from "../../../store/actions/cartActions";
+import { SIGNIN } from "../../Navigation/types";
 
-const CartList = () => {
+const CartList = ({ navigation }) => {
+  const dispatch = useDispatch();
   const items = useSelector((state) => state.cartReducer.items);
   const products = useSelector((state) => state.productReducer.products);
+  const user = useSelector((state) => state.authReducer.user);
 
   const cartItems = items
     .map((item) => ({
@@ -14,6 +19,19 @@ const CartList = () => {
       quantity: item.quantity,
     }))
     .map((item) => <CartItem item={item} key={item.id} />);
+
+  const handleCheckout = () => {
+    if (user) dispatch(checkout(items));
+    else
+      Alert.alert("Sign in ", "You need to be signed in to place an order", [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "Sign in", onPress: () => navigation.navigate(SIGNIN) },
+      ]);
+  };
   return (
     <Center flex={1}>
       <Box w="95%">
@@ -21,6 +39,7 @@ const CartList = () => {
         <List space={2} my={2}>
           {cartItems}
         </List>
+        <Button onPress={handleCheckout}>Checkout</Button>
       </Box>
     </Center>
   );

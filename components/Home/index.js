@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 
 // Stylings
 import styles from "../../styles";
 import { ImageBackground, Text, TouchableOpacity, View } from "react-native";
+import { Input } from "native-base";
 import { SHOP_LIST } from "../Navigation/types";
 
 const Home = ({ navigation }) => {
+  const [user, setUser] = useState({
+    username: "",
+    password: "",
+  });
   return (
     <TouchableOpacity
       activeOpacity
@@ -20,6 +25,15 @@ const Home = ({ navigation }) => {
         <View style={styles.titleView}>
           <Text style={styles.title}>Chocolate & Beyond</Text>
         </View>
+        <Input
+          w="100%"
+          mx={3}
+          placeholder="Default Input"
+          onChangeText={(username) => setUser({ ...user, username })}
+          color="white"
+          secureTextEntry={true}
+          // autoCapitalize={false}
+        />
         <Text style={styles.title}>Check out our Shops</Text>
       </ImageBackground>
     </TouchableOpacity>

@@ -6,3 +6,7 @@ export const SHOP_DETAIL = "SHOP_DETAIL";
 
 // Cart
 export const CART_LIST = "CART_LIST";
+
+// User
+export const SIGNIN = "SIGNIN";
+export const SIGNUP = "SIGNUP";
